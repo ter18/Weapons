@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% block title  weapon.name  %}
+
+{% block body %}
+	<div class="container mt-4">
+		<div class="row"></div>
+		<div class="col-md-4">
+        <img src="../img/IBN500.jpg" class="imgshow" alt="El psy congoroo">
+        </div>
+		<div class="col-md-8">
+			<h1>ネームコード: {{ weapon.name }}</h1>
+            <h2>日付: {{ weapon.formattedDate }}</h2>
+            <div class="text-danger" id="wdescription">{{ weapon.description }}</div>
+			<h2>パワー: {{ weapon.truePower }}</h2>
+			<a href="#" class="btn btn-danger mt-4">たすけて</a>
+            
+		</div>
+	</div>
+
+{% endblock %}
