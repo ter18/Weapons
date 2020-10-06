@@ -24,10 +24,11 @@
 							</a>
 						</li>
 					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<input class="form-control mr-sm-2" type="search" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">探します</button>
-					</form>
+					
+					<a href="{{ path('login') }}" class="btn btn-outline-success my-2 my-sm-0">Login</a>
+					{% if app.user %}
+						<a href="{{ path('logout') }}" class="btn btn-outline-danger my-2 my-sm-0 ml-3">Logout</a>
+					{% endif %}
 				</div>
 			</nav>
 			{% block body %}{% endblock %}

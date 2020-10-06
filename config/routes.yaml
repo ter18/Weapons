@@ -4,7 +4,8 @@ home:
 weapons.index:
   path: /armes
   controller: App\Controller\WeaponsController::index
-
+logout:
+  path: /logout
 
 
 #index:
