@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=App\Repository\WeaponRepository::class)
+ * @UniqueEntity("name")
  */
 class Weapon
 {
@@ -24,6 +27,7 @@ class Weapon
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=5, max=255)
      */
     private $name;
 
