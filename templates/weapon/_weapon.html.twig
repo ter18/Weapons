@@ -1,0 +1,18 @@
+<div class="card mb-4">
+	<div class="card-body">
+		<h5 class="card-title">
+			<a href="{{ path('weapon.show', {slug: weapon.slug, id: weapon.id}) }}">
+				{{ weapon.name }}
+			</a>
+		</h5>
+		{% if weapon.image %}
+			<img class="card-img-top mt-3 mb-3" src="{{ asset('uploads/' ~ weapon.image) }}" alt="{{ weapon.image }}">
+		{% else %}
+			<img class="card-img-top mt-3 mb-3" src="image/vyp1.jpg" alt="Steins;Gate">
+		{% endif %}
+
+		<p class="card-text">{{ weapon.description | u.truncate(90, '...') }}</p>
+		<p class="card-text mt-2">Date de création: {{ weapon.formattedDate }}</p>
+	</div>
+</div>
+

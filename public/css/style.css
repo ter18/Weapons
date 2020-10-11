@@ -11,3 +11,13 @@
 .form_delete {
     display: inline-block;
 }
+
+.desc p {
+    line-height: 22px;
+    height: 70px;
+    overflow: hidden;
+}
+
+.descshow {
+    overflow: visible,
+}

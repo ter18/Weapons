@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Weapon;
+use App\Entity\WeaponSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -34,6 +36,27 @@ class WeaponRepository extends ServiceEntityRepository
         ->getResult()
     ;
     }
+    
+    /**
+     *
+     * @return Query
+     */
+    public function findAllQuery(WeaponSearch $weaponSearch): Query
+    {
+        $query = $this->createQueryBuilder('w');
+        if($weaponSearch->getSearchName()){
+            $query = $query
+                ->andWhere('w.name = :name')
+                ->setParameter('name', $weaponSearch->getSearchName());
+        }
+        if($weaponSearch->getSearchDate()){
+            $query = $query
+                ->andWhere('YEAR(w.created_at) = :date')
+                ->setParameter('date', $weaponSearch->getSearchDate());
+        }
+        return $query->getQuery();
+    }
+
     // /**
     //  * @return Weapon[] Returns an array of Weapon objects
     //  */

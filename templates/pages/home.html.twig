@@ -14,17 +14,8 @@
 		<h2>Secret weapons</h2>
 		<div class="row flex">
 			{% for weapon in weapons %}
-				<div class="col-5 mt-3">
-					<div class="card">
-						<div class="card-body"> 
-							<h5 class="card-title">
-								<a href="{{ path('weapon.show', {id: weapon.id, slug: weapon.slug }) }}">{{ weapon.name }}</a>
-							</h5>
-							<img class="card-img-top mt-3 mb-3" src="img/IBN500.jpg" alt="IBN5100">
-							<p class="card-text">{{ weapon.description }}</p>
-							<p class="card-text">Date de création: {{ weapon.formattedDate }}</p>
-						</div>
-					</div>
+				<div class="col-6 mt-3">
+					{% include "weapon/_weapon.html.twig" %}
 				</div>
 			{% endfor %}
 		</div>
