@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Options;
 use App\Entity\Weapon;
 use App\Form\WeaponType;
 use App\Repository\WeaponRepository;
@@ -73,6 +74,7 @@ class AdminWeaponsController extends AbstractController
      */
     public function edit(Weapon $weapon, Request $request)
     {
+
         $form = $this->createForm(WeaponType::class, $weapon);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

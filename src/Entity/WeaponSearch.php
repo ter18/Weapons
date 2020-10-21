@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class WeaponSearch
@@ -17,9 +18,17 @@ class WeaponSearch
      * @Assert\Regex("/^[0-9]{4}$/")
      */
     private $searchDate;
+    
+    /**
+     *
+     * @var ArrayCollection
+     */
+    private $searchOptions;
+
 
     public function __construct()
     {
+        $this->searchOptions = new ArrayCollection();
     }
 
     /**
@@ -66,6 +75,30 @@ class WeaponSearch
     public function setSearchName($searchName)
     {
         $this->searchName = $searchName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of searchOptions
+     *
+     * @return  ArrayCollection
+     */ 
+    public function getSearchOptions()
+    {
+        return $this->searchOptions;
+    }
+
+    /**
+     * Set the value of searchOptions
+     *
+     * @param  ArrayCollection  $searchOptions
+     *
+     * @return  self
+     */ 
+    public function setSearchOptions(ArrayCollection $searchOptions)
+    {
+        $this->searchOptions = $searchOptions;
 
         return $this;
     }

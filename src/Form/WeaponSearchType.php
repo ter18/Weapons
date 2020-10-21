@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Options;
 use App\Entity\WeaponSearch;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,6 +28,13 @@ class WeaponSearchType extends AbstractType
                 'attr' => [
                     'placeholder' => '年(Ex: 2018)'
                 ]
+            ])
+            ->add('searchOptions', EntityType::class, [
+                'class' => Options::class,
+                'required' => false,
+                'choice_label' => 'name',
+                'label' => false,
+                'multiple' => true,
             ])
         ;
     }

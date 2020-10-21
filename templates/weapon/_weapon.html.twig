@@ -11,7 +11,11 @@
 			<img class="card-img-top mt-3 mb-3" src="image/vyp1.jpg" alt="Steins;Gate">
 		{% endif %}
 
-		<p class="card-text">{{ weapon.description | u.truncate(90, '...') }}</p>
+		<div class="desc">
+		<p class="card-text">{{ weapon.description }}</p>
+		<button id="btn" class="readmore btn btn-secondary">Read more</button>
+		</div>
+
 		<p class="card-text mt-2">Date de création: {{ weapon.formattedDate }}</p>
 	</div>
 </div>

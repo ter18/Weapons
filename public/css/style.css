@@ -18,6 +18,19 @@
     overflow: hidden;
 }
 
-.descshow {
-    overflow: visible,
+.showContent p {
+    overflow: visible;
+    height: auto;
+}
+
+.showContent button {
+    background-color: red;
+}
+
+.contact {
+    display: initial;
+}
+
+.hide {
+    display: none;
 }

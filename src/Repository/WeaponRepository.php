@@ -54,6 +54,17 @@ class WeaponRepository extends ServiceEntityRepository
                 ->andWhere('YEAR(w.created_at) = :date')
                 ->setParameter('date', $weaponSearch->getSearchDate());
         }
+
+        if($weaponSearch->getSearchOptions()->count() > 0){
+            $k = 0;
+            foreach($weaponSearch->getSearchOptions() as $option){
+                $k++;
+                $query = $query
+                ->andWhere(":option$k MEMBER OF w.options")
+                ->setParameter("option$k", $option);
+            }
+
+        }
         return $query->getQuery();
     }
 

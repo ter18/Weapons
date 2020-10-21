@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block title 'Gérer les options' %}
+
+{% block body %}
+	<div class="container mt-4">
+		<h1>G-e-s-t-i-o-n</h2>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+		<table class="table table-striped mt-4">
+			<thead>
+				<tr>
+					<th>Titre</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for option in options %}
+					<tr>
+						<td>{{ option.name }}</td>
+						<td>
+							<a href="{{ path('admin.options.edit', {id: option.id}) }}" class="btn btn-primary">Éditer</a>
+							<form method="post" action="{{ path('admin.options.delete', {id: option.id}) }}" class="form_delete" onsubmit="return confirm('100%?')">
+							<input type="hidden" name="_method" value="DELETE">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ option.id) }}">
+							<button class="btn btn-danger">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="text-right">
+			<a href="{{ path('admin.options.create') }}" class="btn btn-secondary">兵器を作る</a>
+		</div>
+
+	</div>
+
+{% endblock %}

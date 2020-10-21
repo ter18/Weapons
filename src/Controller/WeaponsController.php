@@ -1,9 +1,12 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Entity\Weapon;
 use App\Entity\WeaponSearch;
+use App\Form\ContactType;
 use App\Form\WeaponSearchType;
+use App\Notification\ContactNotification;
 use App\Repository\WeaponRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,7 +49,7 @@ class WeaponsController extends AbstractController
      * @param Weapon $weapon
      * @param String $slug
      */
-    public function show(Weapon $weapon, string $slug): Response
+    public function show(Weapon $weapon, string $slug, Request $request, ContactNotification $notification): Response
     {
         if($weapon->getSlug() !== $slug) {
             return $this->redirectToRoute('weapon.show', [
@@ -54,9 +57,24 @@ class WeaponsController extends AbstractController
                 'slug' => $weapon->getSlug()
             ], 301);
         }
+        $contact = new Contact();
+        $contact->setWeapon($weapon);
+        $form = $this->createForm(ContactType::class,$contact);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $notification->notify($contact);
+            $this->addFlash('success','Votre email a bien été envoyé');
+            return $this->redirectToRoute('weapon.show', [
+                'id' => $weapon->getId(),
+                'slug' => $weapon->getSlug()
+            ]);
+        }
+
         return $this->render('weapon/show.html.twig', [
             'current_menu' => 'weapons',
-            'weapon' => $weapon
+            'weapon' => $weapon,
+            'form_contact' => $form->createView()
         ]);
     }
 }

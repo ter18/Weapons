@@ -14,6 +14,9 @@
 				{{ form_row(form_search.searchDate) }}
 			</div>
 			<div class="col">
+				{{ form_row(form_search.searchOptions) }}
+			</div>
+			<div class="col">
 			<div class="form-group">
 				<button class="btn btn-primary">Rechercher</button>
 			</div>
@@ -22,7 +25,6 @@
 		{{ form_end(form_search) }}
 		</div>
 	</div>
-
 
 	<div class="container mt-4">
 		<div class="row flex">
@@ -39,4 +41,7 @@
 	</div>
 {% endblock %}
 
+{% block javascripts %}
+	<script src="{{ asset('js/app.js') }}"></script>
+{% endblock %}
 

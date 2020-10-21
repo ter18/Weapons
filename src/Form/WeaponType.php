@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Options;
 use App\Entity\Weapon;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -23,6 +25,11 @@ class WeaponType extends AbstractType
                 'mapped' => false,
                 'label' => 'Charger un fichier',
                 'required' => false,
+            ])
+            ->add('options', EntityType::class,[
+                'class' => Options::class,
+                'choice_label' => 'name',
+                'multiple' => true
             ])
         ;
     }
