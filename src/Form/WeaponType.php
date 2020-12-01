@@ -29,6 +29,7 @@ class WeaponType extends AbstractType
             ->add('options', EntityType::class,[
                 'class' => Options::class,
                 'choice_label' => 'name',
+                'required' => false,
                 'multiple' => true
             ])
         ;

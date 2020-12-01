@@ -36,6 +36,22 @@ class WeaponRepository extends ServiceEntityRepository
         ->getResult()
     ;
     }
+
+     /**
+     * findRange
+     *
+     * @return Weapon[]
+     */
+    public function findRange($start, $limit): array
+    {
+        return $this->createQueryBuilder('w')
+        ->orderBy('w.id', 'ASC')
+        ->setMaxResults($limit)
+        ->setFirstResult($start)
+        ->getQuery()
+        ->getResult()
+    ;
+    }
     
     /**
      *

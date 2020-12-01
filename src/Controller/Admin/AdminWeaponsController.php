@@ -10,7 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminWeaponsController extends AbstractController
@@ -36,9 +38,18 @@ class AdminWeaponsController extends AbstractController
     /**
      * @Route("/admin/weapon", name="admin.weapon.index")
      */
-    public function index()
+    public function index(Request $request): Response
     {
-        $weapons = $this->weaponRepository->findAll();
+        if($request->isXmlHttpRequest()){
+            $start = $request->get('start');
+            $limit = $request->get('limit');
+            $weapons = $this->weaponRepository->findRange($start,$limit);
+            if($weapons == null) return new Response('reachedMax');
+            return $this->render('admin/weapon/contentForAjax.html.twig', compact('weapons'));
+        }else{
+            $weapons = $this->weaponRepository->findRange(1,12);
+        }
+        
         return $this->render('admin/weapon/index.html.twig', compact('weapons'));
     }
 

@@ -1,0 +1,13 @@
+{% for weapon in weapons %}
+	<tr>
+		<td>{{ weapon.name }}</td>
+		<td>
+			<a href="{{ path('admin.weapon.edit', {id: weapon.id}) }}" class="btn btn-primary">Éditer</a>
+			<form method="post" action="{{ path('admin.weapon.delete', {id: weapon.id}) }}" class="form_delete" onsubmit="return confirm('100%?')">
+				<input type="hidden" name="_method" value="DELETE">
+				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ weapon.id) }}">
+				<button class="btn btn-danger">Supprimer</button>
+			</form>
+		</td>
+	</tr>
+{% endfor %}

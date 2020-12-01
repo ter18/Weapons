@@ -3,8 +3,17 @@
 
 {% block body %}
 	<div class="container mt-4">
-		<h1>G-e-s-t-i-o-n</h2>
+		<div class="row">
+			<div class="col">
+				<h1>G-e-s-t-i-o-n</h1>
+			</div>
+			<div class="col mt-2">
+				<div>
+					<a href="{{ path('admin.weapon.new') }}" class="btn btn-secondary">兵器を作る</a>
+				</div>
 
+			</div>
+		</div>
 		{% for message in app.flashes('success') %}
 			<div class="alert alert-success">
 				{{ message }}
@@ -17,26 +26,21 @@
 					<th>Actions</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="results">
 				{% for weapon in weapons %}
 					<tr>
 						<td>{{ weapon.name }}</td>
 						<td>
 							<a href="{{ path('admin.weapon.edit', {id: weapon.id}) }}" class="btn btn-primary">Éditer</a>
 							<form method="post" action="{{ path('admin.weapon.delete', {id: weapon.id}) }}" class="form_delete" onsubmit="return confirm('100%?')">
-							<input type="hidden" name="_method" value="DELETE">
-							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ weapon.id) }}">
-							<button class="btn btn-danger">Supprimer</button>
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ weapon.id) }}">
+								<button class="btn btn-danger">Supprimer</button>
 							</form>
 						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
-		<div class="text-right">
-			<a href="{{ path('admin.weapon.new') }}" class="btn btn-secondary">兵器を作る</a>
-		</div>
-
 	</div>
-
 {% endblock %}
